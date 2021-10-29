@@ -13,7 +13,7 @@ class Login : AppCompatActivity() {
         setContentView(R.layout.activity_login)
         val linkText = findViewById<TextView>(R.id.textView4)
         linkText.setOnClickListener{
-            Toast.makeText(this,"Link has been clicked!",Toast.LENGTH_SHORT).show()
+           // Toast.makeText(this,"Link has been clicked!",Toast.LENGTH_SHORT).show()
             Intent(this,SignUp::class.java).also {
                 startActivity(it)
             }
