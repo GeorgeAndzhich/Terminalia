@@ -14,7 +14,8 @@ class MainActivity : AppCompatActivity() {
         val button = findViewById<Button>(R.id.button2)
         val db = Firebase.database
         val ref = db.reference
-        ref.setValue("Connection sucessfull!")
+        getSupportActionBar()?.hide()
+        ref.setValue("Connection sucessfull!2")
         button.setOnClickListener{
             Intent(this,Login::class.java).also {
                 startActivity(it)
