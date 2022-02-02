@@ -21,8 +21,8 @@ class Login : AppCompatActivity() {
         getSupportActionBar()?.hide()
         val linkText = findViewById<TextView>(R.id.textView4)
         val logInButton = findViewById<Button>(R.id.button)
-        var mail = findViewById<EditText>(R.id.editTextTextEmailAddress2).text.toString()
-        var password = findViewById<EditText>(R.id.editTextTextPassword).text.toString()
+        var mail = findViewById<EditText>(R.id.editTextTextEmailAddress2)
+        var password = findViewById<EditText>(R.id.editTextTextPassword)
         linkText.setOnClickListener{
            // Toast.makeText(this,"Link has been clicked!",Toast.LENGTH_SHORT).show()
             Intent(this,SignUp::class.java).also {
@@ -31,7 +31,7 @@ class Login : AppCompatActivity() {
         }
         logInButton.setOnClickListener{
             GlobalScope.launch(Dispatchers.IO) {
-                logIn(mail,password)
+                logIn(mail.text.toString().trim(),password.text.toString().trim())
             }
         }
     }

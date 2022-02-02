@@ -2,35 +2,26 @@ package com.example.terminalia
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
+import android.widget.EditText
 import android.widget.Toast
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class SignUp : AppCompatActivity() {
-    private lateinit var auth: FirebaseAuth
+   private var auth : FirebaseAuth = FirebaseAuth.getInstance()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up2)
         getSupportActionBar()?.hide()
-        var mail= findViewById<EditText>(R.id.editTextTextEmailAddress).text.toString()
-        var password = findViewById<EditText>(R.id.editTextTextPassword).text.toString()
+        var mail= findViewById<EditText>(R.id.editTextTextEmailAddress).text
+        var password = findViewById<EditText>(R.id.editTextTextPassword2).text
         val signUpbutton = findViewById<Button>(R.id.button3)
         signUpbutton.setOnClickListener{
-           GlobalScope.launch(Dispatchers.IO) {
-               SignUp(mail,password)
+            auth.createUserWithEmailAndPassword(mail.toString().trim(),password.toString().trim())
            }
-            }
     }
+   }
 
-    suspend fun  SignUp(mail:String,password:String){
-        auth.createUserWithEmailAndPassword(mail,password).addOnCompleteListener{
-            if (it.Sucessfull){
-                Toast.makeText(baseContext,"User registered sucessfully!",Toast.LENGTH_LONG).show()
-                finish()
-            } else {
-                Toast.makeText(baseContext,"User  not registered due to ${it.exception}",Toast.LENGTH_LONG).show()
-            }
-        }
-    }
-}
