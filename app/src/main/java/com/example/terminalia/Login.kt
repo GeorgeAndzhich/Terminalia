@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 import org.w3c.dom.Text
 
 class Login : AppCompatActivity() {
-    private lateinit var auth:FirebaseAuth
+    private var auth : FirebaseAuth = FirebaseAuth.getInstance()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -23,25 +23,28 @@ class Login : AppCompatActivity() {
         val logInButton = findViewById<Button>(R.id.button)
         var mail = findViewById<EditText>(R.id.editTextTextEmailAddress2)
         var password = findViewById<EditText>(R.id.editTextTextPassword)
-        linkText.setOnClickListener{
-           // Toast.makeText(this,"Link has been clicked!",Toast.LENGTH_SHORT).show()
-            Intent(this,SignUp::class.java).also {
+        linkText.setOnClickListener {
+            // Toast.makeText(this,"Link has been clicked!",Toast.LENGTH_SHORT).show()
+            Intent(this, SignUp::class.java).also {
                 startActivity(it)
             }
         }
-        logInButton.setOnClickListener{
-            GlobalScope.launch(Dispatchers.IO) {
-                logIn(mail.text.toString().trim(),password.text.toString().trim())
-            }
-        }
-    }
-    suspend fun  logIn(mail:String,password:String){
-        auth.signInWithEmailAndPassword(mail,password).addOnCompleteListener{
-            if (it.isSuccessful){
-                Toast.makeText(baseContext,"User registered sucessfully!",Toast.LENGTH_LONG).show()
-                finish()
-            } else {
-                Toast.makeText(baseContext,"User  not registered due to ${it.exception}",Toast.LENGTH_LONG).show()
+        logInButton.setOnClickListener {
+            auth.signInWithEmailAndPassword(
+                mail.text.toString().trim(),
+                password.text.toString().trim()
+            ).addOnCompleteListener {
+                if (it.isSuccessful) {
+                    Toast.makeText(this, "User logged in sucessfully!", Toast.LENGTH_LONG)
+                        .show()
+                    finish()
+                } else {
+                    Toast.makeText(
+                        this,
+                        "User  not authenticated due to ${it.exception}",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
             }
         }
     }

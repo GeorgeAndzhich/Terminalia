@@ -6,9 +6,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 class SignUp : AppCompatActivity() {
    private var auth : FirebaseAuth = FirebaseAuth.getInstance()
@@ -21,7 +19,7 @@ class SignUp : AppCompatActivity() {
         val signUpbutton = findViewById<Button>(R.id.button3)
         signUpbutton.setOnClickListener{
             auth.createUserWithEmailAndPassword(mail.toString().trim(),password.toString().trim())
-           }
+            }
+        }
     }
-   }
 
