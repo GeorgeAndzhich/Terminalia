@@ -1,3 +1,5 @@
 package com.example.terminalia.models
 
-//data class Airport()
+import android.media.Image
+
+data class Airport(val name:String, val code:String,val image:Image)
