@@ -1,5 +1,6 @@
 package com.example.terminalia
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -7,6 +8,7 @@ import android.widget.EditText
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.*
+import com.example.terminalia.models.User
 
 class SignUp : AppCompatActivity() {
    private var auth : FirebaseAuth = FirebaseAuth.getInstance()
@@ -18,7 +20,16 @@ class SignUp : AppCompatActivity() {
         var password = findViewById<EditText>(R.id.editTextTextPassword2).text
         val signUpbutton = findViewById<Button>(R.id.button3)
         signUpbutton.setOnClickListener{
-            auth.createUserWithEmailAndPassword(mail.toString().trim(),password.toString().trim())
+            auth.createUserWithEmailAndPassword(mail.toString().trim(),password.toString().trim()).addOnSuccessListener {
+                     Toast.makeText(this,
+                         "Пользователь успешно зарегистрирован!",
+                         Toast.LENGTH_SHORT).show()
+
+                      Intent(this,
+                          Search::class.java).also{
+                          startActivity(it)
+                      }
+                }
             }
         }
     }
