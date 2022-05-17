@@ -6,7 +6,6 @@ import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import  com.example.terminalia.API.API
 
 class code : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
