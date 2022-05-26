@@ -14,4 +14,7 @@
     <string name="view_flights">Посмотреть рейсы</string>
     <string name="flight_from">От</string>
     <string name="flight_to">До</string>
+    <string name="confirm">Потвердите номер билета</string>
+    <string name="proceed"> Продолжить</string>
+    <string name="edit_hint">Введите номер билета</string>
 </resources>
